@@ -1,0 +1,57 @@
+<%= render 'shared/title', title: "#{@post.title}" %>
+
+<div class="container">
+  <hr>
+  <div class="row">
+    <div class="col-xs-2">
+      <div>
+      <% if logged_in? %>
+        <%= link_to vote_post_path(@post, vote: true), class: "btn btn-primary", method: 'post' do %>
+          Like
+        <% end %>
+      <%end %>
+      </div>
+      <div><%= @post.total_votes %>Votes</div>
+      <div>
+      <% if logged_in? %>
+
+        <%= link_to vote_post_path(@post, vote: false), class: "btn btn-danger", method: 'post' do %>
+          Dislike
+        <% end %>
+      <% end %>
+      </div>
+    </div>
+
+    <div class="col-xs-10">
+      <p><%= @post.content %></p>
+      <p class="text-right text-bottom text-primary"><%= @post.user.name %></p>
+    </div>
+  </div>
+
+  <hr>
+  <% @comments.each do |comment| %>
+  <div class="row">
+    <div class="col-xs-10">
+      <p><%= comment.content %></p>
+    </div>
+    <div class="col-xs-2">
+      <p class="text-right text-primary"><%= comment.user.name %></p>
+    </div>
+  </div>
+  <% end %>
+
+  <% if logged_in? %>
+    <h4>Leave a comment:</h4>
+    <%= form_for [@post, @comment] do |f| %>
+      <div class="row">
+        <div>
+          <%= f.text_field :content, maxlength: 96, class: 'col-xs-10' %>
+        </div>
+        <div class="col-xs-2">
+          <%= f.submit 'Submit', class: 'btn btn-primary' %>
+        </div>
+      </div>
+      <br>
+    <% end %>
+  <% end %>
+</div>

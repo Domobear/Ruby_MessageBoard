@@ -1,0 +1,24 @@
+<%= render 'shared/title', title: 'Post List'%>
+
+<div class="container">
+    <table class="col-md-12 table table-striped">
+        <thead>
+            <tr>
+                <th width="10%">ID</th>
+                <th width="60%">Title</th>
+                <th width="10%">Poster</th>
+                <th width="20%">Created At</th>
+            </tr>
+        </thead>
+        <tbody>
+          <% @posts.each do |post| %>
+          <tr>
+            <td width="10%"><%= post.id.to_s.rjust(3, "0") %></td>
+            <td width="60%"><%= link_to post.title, post_path(post) %></td>
+            <td width="10%"><%= post.user.name %></td>
+            <td width="20%"><%= post.created_at %></td>
+          </tr>
+          <% end %>
+        </tbody>
+    </table>
+</div>

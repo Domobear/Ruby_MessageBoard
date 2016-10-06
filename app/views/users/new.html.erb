@@ -1,0 +1,23 @@
+<%= render 'shared/title', title: 'Register'%>
+
+<div class="container">
+    <%= form_for @user do |f| %>
+    <div>
+        <%= f.label :name %>
+        <br>
+        <%= f.text_field :name %>
+    </div>
+    <div>
+        <%= f.label :email %>
+        <br>
+        <%= f.text_field :email %>
+    </div>
+    <div>
+        <%= f.label :password %>
+        <br>
+        <%= f.password_field :password %>
+    </div>
+    <br>
+    <%= f.submit(@user.new_record? ? 'Register' : 'Update Profile', class: 'btn btn-success') %>
+    <% end %>
+</div>
